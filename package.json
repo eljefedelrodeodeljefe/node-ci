@@ -1,0 +1,38 @@
+{
+  "name": "node-ci",
+  "version": "0.1.0",
+  "description": "An universal, deploy-anywhere CI/CD system backed by containers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape 'test**/*.spec.js'"
+  },
+  "bin": ".bin/nodeci",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eljefedelrodeodeljefe/node-ci.git"
+  },
+  "keywords": [
+    "CI",
+    "CD",
+    "CI/CD",
+    "continuous",
+    "delivery",
+    "continuous",
+    "delivery"
+  ],
+  "author": "Robert Jefe Lindstaedt <robert.lindstaedt@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eljefedelrodeodeljefe/node-ci/issues"
+  },
+  "homepage": "https://github.com/eljefedelrodeodeljefe/node-ci#readme",
+  "devDependencies": {
+    "nodemon": "^1.11.0",
+    "standard": "^8.6.0",
+    "tape": "^4.6.3"
+  },
+  "dependencies": {
+    "js-yaml": "^3.8.1",
+    "minimist": "^1.2.0"
+  }
+}

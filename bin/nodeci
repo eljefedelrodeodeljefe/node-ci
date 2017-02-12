@@ -1,0 +1,8 @@
+#!/usr/bin/env node
+const parseArgs = require('minimist')
+const argv = parseArgs(process.argv.slice(2))
+const configCLI = require('./config')
+
+if (argv._[0] === 'config') {
+  return configCLI(argv._.slice(1))
+}

@@ -1,0 +1,15 @@
+services:
+  - docker
+  - redis
+
+install:
+  - npm install
+
+build:
+  - docker build -t node-ci-sample .
+
+test:
+  - npm test
+
+deploy:
+  - echo "deployed"
