@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "js-yaml": "^3.8.1",
-    "minimist": "^1.2.0"
+    "minimist": "^1.2.0",
+    "restify": "^4.3.0"
   }
 }
