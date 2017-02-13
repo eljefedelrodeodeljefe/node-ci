@@ -8,6 +8,5 @@ module.exports = (argv) => {
     if (!config) {
       throw new Error(`invalid yaml ${path.resolve(process.cwd(), argv[1])}`)
     }
-
   }
 }
