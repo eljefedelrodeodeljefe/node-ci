@@ -36,15 +36,22 @@
     "tape": "^4.6.3"
   },
   "dependencies": {
+    "body-parser": "^1.16.1",
+    "connect-history-api-fallback": "^1.3.0",
+    "cookie-parser": "^1.4.3",
     "dockerode": "2.3.1",
+    "express": "^4.14.1",
+    "express-pino-logger": "^2.0.0",
     "git-url-parse": "^6.2.0",
     "github": "^8.2.1",
+    "helmet": "^3.4.0",
     "js-yaml": "3.8.1",
     "keypair": "^1.0.1",
     "minimist": "1.2.0",
     "node-forge": "^0.7.0",
     "nodegit": "^0.17.0",
     "restify": "4.3.0",
+    "socket.io": "^1.7.2",
     "ssh-url": "^0.1.5",
     "uuid": "^3.0.1"
   }
