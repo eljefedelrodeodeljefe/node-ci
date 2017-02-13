@@ -1,5 +1,6 @@
 const EventEmitter = require('events')
 const Server = require('./server/index')
+const APIServer = require('./api/index')
 
 class Destack extends EventEmitter {
   constructor (options) {
@@ -17,7 +18,8 @@ class Destack extends EventEmitter {
     }
 
     const opts = Object.assign({
-      port: 8080
+      port: 8080,
+      apiPort: 3000
     }, options)
 
     self.emit('before-server-start', Server, self)
@@ -25,6 +27,13 @@ class Destack extends EventEmitter {
     Server.start(opts, (server) => {
       self.server = server
       self.emit('server-start', self.server, self)
+
+      self.emit('before-api-server-start', APIServer, self)
+
+      APIServer.start(opts, (apiServer) => {
+        self.apiServer = apiServer
+        self.emit('api-server-start', self.apiServer, self)
+      })
     })
   }
 }
