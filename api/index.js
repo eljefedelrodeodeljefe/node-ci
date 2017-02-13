@@ -1,5 +1,6 @@
 const restify = require('restify')
 const pino = require('pino')()
+const debug = require('debug')('destackci:api')
 const logger = require('restify-pino-logger')()
 const routes = require('./routes')
 
@@ -35,6 +36,7 @@ routes.register(server)
 
 exports.start = (options, cb) => {
   server.listen(options.apiPort, () => {
+    debug('API server started')
     return cb(server)
   })
 }

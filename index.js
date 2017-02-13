@@ -1,4 +1,5 @@
 const EventEmitter = require('events')
+const debug = require('debug')('destackci:core')
 const Server = require('./server/index')
 const APIServer = require('./api/index')
 
@@ -33,6 +34,7 @@ class Destack extends EventEmitter {
       APIServer.start(opts, (apiServer) => {
         self.apiServer = apiServer
         self.emit('api-server-start', self.apiServer, self)
+        debug('destackci initialized')
       })
     })
   }

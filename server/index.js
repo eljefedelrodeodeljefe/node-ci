@@ -1,5 +1,6 @@
 const path = require('path')
 const url = require('url')
+const debug = require('debug')('destackci:app')
 const helmet = require('helmet')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
@@ -93,5 +94,6 @@ io.on('connection', (socket) => {
 
 exports.start = (options, cb) => {
   server.listen(options.port)
+  debug('app server started')
   return cb(server)
 }
