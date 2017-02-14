@@ -18,7 +18,7 @@ server.pre(restify.CORS({
 }))
 
 restify.CORS.ALLOW_HEADERS.push('authorization')
-server.on('MethodNotAllowed', function(req, res) {
+server.on('MethodNotAllowed', function (req, res) {
   if (req.method.toUpperCase() === 'OPTIONS') {
     // Send the CORS headers
     res.header('Access-Control-Allow-Headers', restify.CORS.ALLOW_HEADERS.join(', '))

@@ -1,5 +1,3 @@
-const path = require('path')
-const url = require('url')
 const debug = require('debug')('destackci:app')
 const helmet = require('helmet')
 const bodyParser = require('body-parser')
@@ -20,11 +18,9 @@ const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 
-const PORT = process.env.PORT || 3000
-
 // cache.init()
 
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
   next()
@@ -86,7 +82,7 @@ io.on('connection', (socket) => {
     socket.volatile.emit('heartbeat', {})
   }, 5000)
   socket.on('disconnect', function () {
-    console.log('user disconnected');
+    console.log('user disconnected')
     clearInterval(heartbeat)
     io.emit('user disconnected')
   })
