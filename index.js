@@ -1,9 +1,11 @@
 const EventEmitter = require('events')
+const path = require('path')
 const debug = require('debug')('destackci:core')
 const Server = require('./server/index')
 const APIServer = require('./api/index')
 
 const Scheduler = require('./lib/scheduler')
+const yaml = require('./lib/yaml')
 
 function isString (str) {
   return typeof str === 'string' || str instanceof String
@@ -53,7 +55,10 @@ class Destack extends EventEmitter {
 
   run (options) {
     let opts = {
-      configPath: null
+      configPath: null,
+      mainModule: process.mainModule.filename,
+      cwd: process.cwd(),
+      macroQueue: null
     }
 
     if (isString(options)) {
@@ -62,13 +67,24 @@ class Destack extends EventEmitter {
       opts = Object.assign(opts, options)
     }
 
+    opts.macroQueue = this._readConfig(opts)
+
     debug('calling _run() with %O', opts)
 
     this._run(opts)
   }
 
-  _run () {
+  _run (opts) {
     this.scheduler = new Scheduler()
+  }
+
+  _readConfig (opts) {
+    if (path.isAbsolute(opts.configPath)) {
+      return yaml.read(opts.configPath)
+    } else {
+      const base = path.dirname(opts.mainModule)
+      return yaml.read(path.resolve(base, opts.configPath))
+    }
   }
 }
 
