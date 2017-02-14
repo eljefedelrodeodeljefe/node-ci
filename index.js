@@ -3,10 +3,21 @@ const debug = require('debug')('destackci:core')
 const Server = require('./server/index')
 const APIServer = require('./api/index')
 
+const Scheduler = require('./lib/scheduler')
+
+function isString (str) {
+  return typeof str === 'string' || str instanceof String
+}
+
+function isObject (obj) {
+  return obj !== null && typeof obj === 'object'
+}
+
 class Destack extends EventEmitter {
   constructor (options) {
     super()
     this.server = null
+    this.scheduler = null
     this.emit('init', this)
   }
 
@@ -35,8 +46,29 @@ class Destack extends EventEmitter {
         self.apiServer = apiServer
         self.emit('api-server-start', self.apiServer, self)
         debug('destackci initialized')
+        return cb()
       })
     })
+  }
+
+  run (options) {
+    let opts = {
+      configPath: null
+    }
+
+    if (isString(options)) {
+      opts.configPath = options
+    } else if (isObject(options)) {
+      opts = Object.assign(opts, options)
+    }
+
+    debug('calling _run() with %O', opts)
+
+    this._run(opts)
+  }
+
+  _run () {
+    this.scheduler = new Scheduler()
   }
 }
 
